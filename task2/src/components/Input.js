@@ -3,7 +3,7 @@ import React from 'react';
 export default class Input extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { comment: '', list: [] };
+    this.state = { comment: '' };
   }
 
   changeHandle = (env) => {
@@ -11,18 +11,18 @@ export default class Input extends React.Component {
   };
 
   submitHandle = (e) => {
-    const text = this.state.comment.trim();
+    const { comment } = this.state;
+    const text = comment.trim();
     e.preventDefault();
-
     if (text.length) {
       fetch('http://localhost:7777/notes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ comment: this.state.comment }),
+        body: JSON.stringify({ comment }),
       })
         .then((res) => {
           if (res.status === 201) {
-            this.props.addList(this.state.comment);
+            this.props.addList(comment);
           }
         });
     }
@@ -30,10 +30,11 @@ export default class Input extends React.Component {
   };
 
   render() {
+    const { comment } = this.state;
     return (
       <div>
         <form onSubmit={this.submitHandle}>
-          <input onChange={this.changeHandle} type="text" value={this.state.comment} name="comment"></input>
+          <input onChange={this.changeHandle} type="text" value={comment} name="comment"></input>
           <button type="submit">send</button>
         </form>
       </div>

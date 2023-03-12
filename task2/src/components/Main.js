@@ -12,11 +12,11 @@ export default class Main extends React.Component {
     this.getListArr();
   }
 
-  getListArr() {
+  getListArr = () => {
     fetch('http://localhost:7777/notes')
       .then((res) => res.json())
       .then((data) => this.setState(this.addList(data)));
-  }
+  };
 
   addList = (data) => this.setState = (prev) => ({ ...prev.list, list: data });
 

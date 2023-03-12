@@ -20,5 +20,6 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': 0,
     'react/self-closing-comp': 0,
+    'no-return-assign': 0,
   },
 };
