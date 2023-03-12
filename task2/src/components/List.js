@@ -8,10 +8,16 @@ export default class List extends React.Component {
   componentDidMount() {
   }
 
-  deleteHandle = (id) => {
-    fetch(`http://localhost:7777/notes/${id}`, {
+  deleteHandle = (dellId) => {
+    fetch(`http://localhost:7777/notes/${dellId}`, {
       method: 'DELETE',
-    });
+    })
+      .then(() => {
+        this.props.addList((prev) => {
+          const newArr = [...prev.list].filter((el) => el.id !== dellId);
+          return { list: newArr };
+        });
+      });
   };
 
   render() {

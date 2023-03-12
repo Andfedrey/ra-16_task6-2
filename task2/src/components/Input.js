@@ -1,5 +1,4 @@
 import React from 'react';
-import List from './List';
 
 export default class Input extends React.Component {
   constructor(props) {
@@ -13,7 +12,6 @@ export default class Input extends React.Component {
 
   submitHandle = (e) => {
     const text = this.state.comment.trim();
-    console.log(text);
     e.preventDefault();
 
     if (text.length) {
@@ -24,7 +22,7 @@ export default class Input extends React.Component {
       })
         .then((res) => {
           if (res.status === 201) {
-            this.props.addList([...this.props.list, { info: this.state.comment }]);
+            this.props.addList(this.state.comment);
           }
         });
     }
