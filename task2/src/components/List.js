@@ -3,9 +3,13 @@ import React from 'react';
 export default class List extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { dellId: '' };
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
+    if (this.state) {
+      this.deleteHandle(this.state.dellId);
+    }
   }
 
   deleteHandle = (dellId) => {
@@ -30,7 +34,7 @@ export default class List extends React.Component {
           list && list.map((note) => (
             <div className="card" key={note.id}>
               <h2>{note.comment}</h2>
-              <button className="cross" type="button" onClick={() => this.deleteHandle(note.id)}>x</button>
+              <button className="cross" type="button" onClick={() => this.setState({ dellId: note.id })}>x</button>
             </div>
           ))
         }
