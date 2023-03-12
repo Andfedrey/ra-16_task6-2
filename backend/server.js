@@ -9,9 +9,9 @@ const app = new Koa();
 app.use(cors());
 app.use(koaBody({ json: true }));
 
+
 const notes = [];
 let nextId = 1;
-
 const router = new Router();
 
 router.get('/notes', async (ctx, next) => {
@@ -19,6 +19,7 @@ router.get('/notes', async (ctx, next) => {
 });
 
 router.post('/notes', async (ctx, next) => {
+    // const info = ...ctx.request.body;
     notes.push({ ...ctx.request.body, id: nextId++ });
     ctx.response.status = 204;
 });

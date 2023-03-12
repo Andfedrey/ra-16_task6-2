@@ -9,37 +9,24 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
+    this.getListArr();
+  }
+
+  getListArr() {
     fetch('http://localhost:7777/notes')
-      .then((data) => data.json())
-      .then((data) => this.giveNote(data));
-
-    fetch('http://localhost:7777/notes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify(this.state.list),
-    })
-      .then((data) => data.json())
-      .then((data) => this.addNote(data));
+      .then((res) => res.json())
+      .then((data) => this.setState(this.addList(data)));
   }
 
-  componentWillUnmount() {
-  }
-
-  giveNote = (newNote) => {
-    this.setState((notes) => ({ list: [...notes.list, newNote] }));
-  };
-
-  addNote = (newNote) => {
-    this.setState((notes) => ({ list: [...notes.list, newNote] }));
+  addList = (data) => {
+    this.setState({ list: data });
   };
 
   render() {
     const { list } = this.state;
     return (
       <div>
-        <Input addNote={this.addNote}></Input>
+        <Input addList={this.addList} list={list} getListArr={this.getListArr}></Input>
         <List list={list}></List>
       </div>
     );
