@@ -11,7 +11,7 @@ export default class Input extends React.Component {
   };
 
   submitHandle = (e) => {
-    const { comment } = this.state;
+    const { comment } = this.state; // получаю данные из state
     const text = comment.trim();
     e.preventDefault();
     if (text.length) {
@@ -21,11 +21,12 @@ export default class Input extends React.Component {
         body: JSON.stringify({ comment }),
       })
         .then((res) => {
-          if (res.status === 201) {
-            this.props.addList(comment);
+          if (res.ok) {
+            this.props.addList(comment); // добавляю новые данные в массив
           }
         });
     }
+
     this.setState({ comment: '' });
   };
 
