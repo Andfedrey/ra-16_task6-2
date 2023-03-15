@@ -7,23 +7,17 @@ export default class List extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state) {
-      const { dellId } = this.state;
+    const { dellId } = this.state;
+    if (dellId) {
       this.deleteHandle(dellId);
+      this.props.getListArr();
     }
   }
 
   deleteHandle = (dellId) => {
     fetch(`http://localhost:7777/notes/${dellId}`, {
       method: 'DELETE',
-    })
-      .then(() => {
-        const { addList } = this.props;
-        addList((prev) => {
-          const newArr = [...prev.list].filter((el) => el.id !== dellId);
-          return { list: newArr };
-        });
-      });
+    });
   };
 
   render() {
