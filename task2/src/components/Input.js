@@ -22,7 +22,7 @@ export default class Input extends React.Component {
       })
         .then((res) => {
           if (res.ok) {
-            this.props.addList(comment); // добавляю новые данные в массив
+            fetch('http://localhost:7777/notes').then((a) => a.json()).then((data) => this.props.add({ list: data }));
           }
         });
     }

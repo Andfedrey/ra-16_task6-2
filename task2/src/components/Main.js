@@ -13,10 +13,20 @@ export default class Main extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.list) {
-      this.getListArr();
-    }
+    this.getListArr();
   }
+
+  // fetchData(props) {
+  //   let { endpoint } = this;
+  //   if (typeof endpoint === 'function') {
+  //     endpoint = endpoint(props);
+  //   }
+  //   fetch(endpoint)
+  //     .then((res) => res.json())
+  //     .then((data) => this.setState({
+  //       [this.propName]: data,
+  //     }));
+  // }
 
   getListArr = () => (
     fetch('http://localhost:7777/notes')
@@ -28,10 +38,15 @@ export default class Main extends React.Component {
 
   render() {
     const { list } = this.state;
-    console.log(list);
     return (
       <div>
-        <Input addList={this.addList} list={list} getListArr={this.getListArr}></Input>
+        <Input
+          addList={this.addList}
+          list={list}
+          add={this.setState}
+          getListArr={this.getListArr}
+        >
+        </Input>
         <List list={list} addList={this.addList}></List>
       </div>
     );
