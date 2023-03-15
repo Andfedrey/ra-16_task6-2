@@ -21,9 +21,13 @@ export default class Input extends React.Component {
         body: JSON.stringify({ comment }),
       })
         .then((res) => {
-          if (res.ok) {
-            fetch('http://localhost:7777/notes').then((a) => a.json()).then((data) => this.props.add({ list: data }));
-          }
+          fetch('http://localhost:7777/notes')
+            .then((a) => {
+              return res.text()})
+            .then((data) => this.props.add((prev) => {
+              console.log(res);
+              return { list: [...prev.list, data] };
+            }));
         });
     }
 
