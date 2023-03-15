@@ -22,12 +22,11 @@ export default class Input extends React.Component {
       })
         .then((res) => {
           fetch('http://localhost:7777/notes')
-            .then((a) => {
-              return res.text()})
-            .then((data) => this.props.add((prev) => {
-              console.log(res);
-              return { list: [...prev.list, data] };
-            }));
+            .then((a) => a.json())
+            .then((data) => {
+              console.log(data);
+              return this.props.addList(data);
+            });
         });
     }
 

@@ -34,7 +34,7 @@ export default class Main extends React.Component {
       .then((data) => this.setState(this.addList(data)))
   );
 
-  addList = (data) => this.setState = (prev) => ({ ...prev.list, list: data });
+  addList = (data) => this.setState = () => ({ list: data });
 
   render() {
     const { list } = this.state;
