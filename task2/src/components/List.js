@@ -7,10 +7,10 @@ export default class List extends React.Component {
   }
 
   componentDidUpdate() {
-    const { dellId } = this.state;
+    const { dellId, getListArr } = this.state;
     if (dellId) {
       this.deleteHandle(dellId);
-      this.props.getListArr();
+      getListArr();
     }
   }
 
